@@ -1,0 +1,30 @@
+template_dir: "./template"
+output_dir: "./output"
+environments:
+  dev:
+    user:
+      server_name: "dev.project.net"
+      host: "user"
+      port: "8080"
+    admin:
+      server_name: "admin.dev.project.net"
+      host: "admin"
+      port: "8081"
+  stg:
+    user:
+      server_name: "stg.project.net"
+      host: "user"
+      port: "8080"
+    admin:
+      server_name: "admin.stg.project.net"
+      host: "admin"
+      port: "8081"
+  prod:
+    user:
+      server_name: "project.net"
+      host: "localhost"
+      port: "8080"
+    admin:
+      server_name: "admin.project.net"
+      host: "localhost"
+      port: "8081"

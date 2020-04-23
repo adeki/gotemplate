@@ -1,0 +1,12 @@
+server {
+{{- if .ServerName }}
+    listen 80;
+    server_name {{ .ServerName }};
+{{- else }}
+    listen 80 default_server;
+{{- end }}
+
+    location / {
+        proxy_pass http://{{ .Host }}:{{ .Port }};
+    }
+}
