@@ -28,6 +28,7 @@ type Config struct {
 			Buckets struct {
 				PublicBucket  string `envconfig:"AWS_S3_BUCKETS_PUBLIC_BUCKET"`
 				PrivateBucket string `envconfig:"AWS_S3_BUCKETS_PRIVATE_BUCKET"`
+				MediaBucket   string `envconfig:"AWS_S3_BUCKETS_MEDIA_BUCKET"`
 			}
 			Endpoint       string `envconfig:"AWS_S3_ENDPOINT"`
 			DisableSSL     bool   `envconfig:"AWS_S3_DISABLESSL"`
@@ -35,6 +36,9 @@ type Config struct {
 		}
 		CloudFront struct {
 			DistributionID string `envconfig:"AWS_CLOUDFRONT_DISTRIBUTION_ID"`
+		}
+		MediaConvert struct {
+			Role string `envconfig:"AWS_MEDIACONVERT_ROLE"`
 		}
 	}
 }
