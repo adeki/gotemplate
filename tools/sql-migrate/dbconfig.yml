@@ -1,0 +1,5 @@
+mysql_env:
+  dialect: mysql
+  datasource: ${MYSQL_USER}:${MYSQL_PASSWORD}@(${MYSQL_HOST}:${MYSQL_PORT})/matome?parseTime=true
+  dir: ./sql/migrations
+  table: migrations
