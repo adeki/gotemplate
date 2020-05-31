@@ -2,7 +2,11 @@ package server
 
 import (
   "net/http"
+
+  "github.com/adeki/go-utils/logger"
+
   "github.com/go-chi/chi"
+  chiMiddleware "github.com/go-chi/chi"
 )
 
 type Server struct {}
@@ -12,9 +16,22 @@ func New() *Server {
 }
 
 func (s *Server) Handler() http.Handler {
-  // r := chi.NewRouter()
-  // return r
-  return nil
+  r := chi.NewRouter()
+    // error page setting
+    r.NotFound(errorHandler(notFound))
+    r.MethodNotAllowed(errorHandler(methodNotAllowed))
+
+    // middleware
+    r.Use(chiMiddleware.Recoverer)
+    r.Use(chiMiddleware.RealIP)
+    r.Use(middleware.Logger)
+    r.Use(chiMiddleware.GetHead)
+
+    // session
+    // r.Use(s.session.LoadAndSave) 
+
+  r.Get("/", getRoot)
+  return r
 }
 
 func (s *Server) Run() {
