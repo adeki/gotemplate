@@ -3,6 +3,7 @@ package s3
 import (
 	"fmt"
 	"io"
+	"time"
 
 	"github.com/adeki/go-utils/config"
 
@@ -56,6 +57,14 @@ func (mys3 *S3) Get(key string) (io.ReadCloser, error) {
 		return nil, detectError(err)
 	}
 	return result.Body, nil
+}
+
+func (mys3 *S3) GetPreSignedURL(key string, expire time.Duration) (string, error) {
+	req, _ := mys3.svc.GetObjectRequest(&s3.GetObjectInput{
+		Bucket: aws.String(mys3.bucket),
+		Key:    aws.String(key),
+	})
+	return req.Presign(expire)
 }
 
 func (mys3 *S3) Delete(key string) error {
